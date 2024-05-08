@@ -1,0 +1,32 @@
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    environment:
+      - URLS=[{"url":"http://localhost:8081/swagger/v1/swagger.json","name":"CiService"},{"url":"http://localhost:8082/swagger/v1/swagger.json","name":"CodeRepository"}]
+      - OAUTH_USE_PKCE=true
+    ports:
+      - "8080:8080"
+  ci-service:
+    build:
+      args:
+        PROJECT_NAME: CiService
+      context: CiService
+      dockerfile: ../aspnet.Dockerfile
+      tags:
+        - entraid-examples/ci-service:local
+    volumes:
+      - "./CiService/appsettings.Compose.json:/app/appsettings.json:ro"
+    ports:
+      - "8081:8080"
+  code-repository-service:
+    build:
+      args:
+        PROJECT_NAME: CodeRepositoryService
+      context: CodeRepositoryService
+      dockerfile: ../aspnet.Dockerfile
+      tags:
+        - entraid-examples/code-repository-service:local
+    volumes:
+      - "./CodeRepositoryService/appsettings.Compose.json:/app/appsettings.json:ro"
+    ports:
+      - "8082:8080"

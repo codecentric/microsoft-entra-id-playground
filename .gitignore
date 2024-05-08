@@ -1,0 +1,10 @@
+.idea
+.terraform
+.terraform.*
+terraform.*
+bin
+obj
+appsettings.Development.json
+appsettings.Compose.json
+appsettings.json
+/config.sh
