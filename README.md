@@ -4,10 +4,14 @@ This repository provides an example how to implement service to service communic
 
 ## How to execute the example
 
-To bootstrap the example against a custom Azure tenant, just execute the `setup_and_start.sh` in the root directory.
-It will print error messages if missing configuration is detected.
+1. Create a `config.sh` file, similar to the `config.example.sh`.
+2. Execute the `setup_and_start.sh` in the root directory.
+  * Provisions example App registrations via terraform in target Entra ID directory
+  * Creates required `appsettings.Compose.json` in `apps/CiService` and `apps/CodeRepositoryService`
+  * Starts a swagger-ui on http://localhost:8080
+  * Builds and starts CiService (port 8081) and CodeRepositoryService (port 8082) as containers
 
-Executing `setup_and_start.sh` sucessfully will start a local swagger-ui, available on http://localhost:8080.
+## Example scenario
 
 Example workflow for on-behalf-of flow:
 

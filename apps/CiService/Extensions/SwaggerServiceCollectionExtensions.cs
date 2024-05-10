@@ -1,7 +1,5 @@
-using CiService.DownstreamApi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
-using Microsoft.Identity.Abstractions;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -10,7 +8,7 @@ namespace CiService.Extensions;
 
 public static class SwaggerServiceCollectionExtensions
 {
-    public static IServiceCollection AddSwaggerGenWithBearerAuth(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddSwaggerGenWithMicrosoftIdentityAuth(this IServiceCollection serviceCollection)
     {
         return serviceCollection
             .AddSwaggerGen()
@@ -30,18 +28,11 @@ public static class SwaggerServiceCollectionExtensions
 
                 var identityOptions = services.GetRequiredService<IOptionsMonitor<MicrosoftIdentityOptions>>().Get(authScheme);
 
-                // var downstreamApiScopes = services.GetAllDownstreamApiScopes();
-
                 var ownScope = $"{identityOptions.ClientId}/.default";
                 var scopes = new Dictionary<string, string>()
                 {
                     { ownScope, "Request permissions for current application" }
                 };
-
-                // foreach (var downstreamApiScope in downstreamApiScopes)
-                // {
-                //     scopes.Add(downstreamApiScope.Value, "Scope for " + downstreamApiScope.Key);
-                // }
 
                 var userAuthSecrityScheme = "UserAuthentication";
                 options.AddSecurityDefinition(userAuthSecrityScheme, new OpenApiSecurityScheme()
@@ -110,17 +101,4 @@ curl https://login.microsoftonline.com/{identityOptions.TenantId}/oauth2/v2.0/to
                 });
             });
     }
-
-    // private static IDictionary<string, string> GetAllDownstreamApiScopes(this IServiceProvider services)
-    // {
-    //     var configuration = services.GetRequiredService<IConfiguration>();
-    //     var downstreamApiOptionsMonitor = services.GetRequiredService<IOptionsMonitor<DownstreamApiOptions>>();
-    //     var downstreamApiConfigurations = configuration.GetSection(DownstreamApiConstants.DownsteamApiConfigurationKey);
-    //
-    //     return downstreamApiConfigurations.GetChildren()
-    //         .Select(config => config.Key)
-    //         .ToDictionary(
-    //             downstreamApiName => downstreamApiName,
-    //             downstreamApiName => downstreamApiOptionsMonitor.Get(downstreamApiName).Scopes!.First());
-    // }
 }

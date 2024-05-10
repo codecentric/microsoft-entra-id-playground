@@ -2,7 +2,7 @@ services:
   swagger-ui:
     image: swaggerapi/swagger-ui
     environment:
-      - URLS=[{"url":"http://localhost:8081/swagger/v1/swagger.json","name":"CiService"},{"url":"http://localhost:8082/swagger/v1/swagger.json","name":"CodeRepository"}]
+      - URLS=[{"url":"http://localhost:8082/swagger/v1/swagger.json","name":"CodeRepository"},{"url":"http://localhost:8081/swagger/v1/swagger.json","name":"CiService"}]
       - OAUTH_USE_PKCE=true
     ports:
       - "8080:8080"

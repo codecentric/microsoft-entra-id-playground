@@ -28,3 +28,9 @@ resource "azuread_service_principal" "ci_service" {
   account_enabled              = true
   app_role_assignment_required = false
 }
+
+resource "azuread_service_principal_password" "ci_service" {
+  service_principal_id = azuread_service_principal.ci_service.object_id
+  display_name = "terraform_generated"
+  end_date_relative = "48h"
+}

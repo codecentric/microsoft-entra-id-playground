@@ -1,0 +1,30 @@
+output "appsettings_json" {
+  value = <<-EOF
+{
+  "AzureAd": {
+    "Instance": "https://login.microsoftonline.com/",
+    "TenantId": ${jsonencode(data.azuread_client_config.current.tenant_id)},
+    "ClientId": ${jsonencode(var.client_id)}
+  },
+  "Cors": {
+    "DockerComposeSwaggerUi": {
+      "Origins": [
+        "http://localhost:8080"
+      ],
+      "Methods": ["GET", "POST", "PUT", "DELETE", "PATCH"],
+      "Headers": ["Authorization", "Content-Type"],
+      "SupportsCredentials": true
+    }
+  },
+  "Logging": {
+    "LogLevel": {
+      "CodeRepositoryService.Middleware.LogAuthorizationHeaderMiddleware": "Trace",
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "Microsoft.AspNetCore.DataProtection": "Error"
+    }
+  },
+  "AllowedHosts": "*"
+}
+EOF
+}

@@ -15,18 +15,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddCodeRepositoryApi(builder.Configuration)
     .AddInMemoryTokenCaches();
 
+// This enables availablility of RequiredScopeOrAppPermissionAttribute on controller actions
 builder.Services.AddRequiredScopeOrAppPermissionAuthorization();
 
 builder.Services.AddSingleton<InMemoryJobRepository>();
 
 builder.Services.AddControllers();
 
+// custom extension to load cors policies from configuration
 builder.Services.AddCorsFromConfiguration();
 
-builder.Services.AddSwaggerGenWithBearerAuth();
+// custom extension to configure swagger in respect to Entra ID authentication
+builder.Services.AddSwaggerGenWithMicrosoftIdentityAuth();
 
 var app = builder.Build();
 
+// custom extension to use policies, which where configured above
 app.UseCorsFromConfiguration();
 
 app.UseSwagger();
