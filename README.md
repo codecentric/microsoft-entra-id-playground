@@ -1,11 +1,31 @@
 # Entra ID service to service communication example
 
-This repository provides an example how to implement service to service communication between custom services.
+This repository provides a playground to experiment with service to service communication between custom services.
 
-## How to execute the example
+The repository contains two small REST API services, implemented in ASP.NET Core:
 
-1. Create a `config.sh` file, similar to the `config.example.sh`.
-2. Execute the `setup_and_start.sh` in the root directory.
+1. CodeRepositoryService
+    * Provides APIs to manage pseudo code repositories
+2. CiService
+    * Provides APIs to create pseudo jobs for repositories, served by CodeRepository service
+    * Communicates either with an app-token, acquired by `client_credentials` flow, or with an user-token, acquired by `on-behalf-of` flow
+
+The repository can be used to demo three authentication flows:
+
+1. [Authorization code flow using PKCE](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow)
+    * Using swagger-ui
+2. [Client credentials flow](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow)
+    * Using terraform-generated `ci-service.client_credentials.for.code-repository-service.sh` script and swagger-ui or implicitly by creating a CiService job, which uses the [.NET `Microsoft.Identity.Web.DownstreamApi` Library](https://learn.microsoft.com/en-us/entra/identity-platform/scenario-web-api-call-api-app-configuration?tabs=aspnetcore)
+3. [On-behalf-of flow](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-on-behalf-of-flow)
+    * Implicitly using the [.NET `Microsoft.Identity.Web.DownstreamApi` Library](https://learn.microsoft.com/en-us/entra/identity-platform/scenario-web-api-call-api-app-configuration?tabs=aspnetcore)
+
+## Getting started
+
+1. Install [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli#install), [Terraform](https://developer.hashicorp.com/terraform/install?product_intent=terraform), [Docker](https://docs.docker.com/engine/install/)
+2. Login to Azure Tenant with Azure CLI: `az login --tenant "${YOUR_TENANT_ID}"`
+    * Nothing bad will happen if you are signed in to a different tenant by accident. The follwing scripts will simply fail to execute.
+3. Create a `config.sh` file, similar to the `config.example.sh`.
+4. Execute the `setup_and_start.sh` in the project root directory.
     * Provisions example App registrations via terraform in target Entra ID directory
     * Creates `appsettings.Compose.json` in `apps/CiService` and `apps/CodeRepositoryService` for docker-compose environment
     * Creates `appsettings.Development.json` in `apps/CiService` and `apps/CodeRepositoryService` for local debugging
@@ -17,7 +37,7 @@ This repository provides an example how to implement service to service communic
 
 1. Open swagger-ui in browser on http://localhost:8080
 
-### Create Code Repository with code
+### Create Code Repository
 
 1. Select `CodeRepository` definition (should be the default)
 2. Authorize for `code-repository-service` Enterprise application
