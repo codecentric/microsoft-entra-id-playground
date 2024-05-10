@@ -29,6 +29,7 @@ output "appsettings_json" {
   },
   "Logging": {
     "LogLevel": {
+      "CiService.Middleware.LogAuthorizationHeaderMiddleware": "Trace",
       "Default": "Information",
       "Microsoft.AspNetCore.DataProtection": "Error"
     }

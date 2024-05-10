@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
-set -ex
+set -e
 
 SCRIPT_DIR=$(dirname -- "$( readlink -f -- "$0"; )";)
 
-. "${SCRIPT_DIR}/config.sh" || ( "config.sh is missing in root directory of this repository! Create it and export missing environment variables on subsequent errors." )
+. "${SCRIPT_DIR}/config.sh" || ( echo "config.sh is missing in root directory of this repository! Create it and export missing environment variables on subsequent errors. See config.example.sh as a reference." && false )
+
+set -ex
 
 "${SCRIPT_DIR}/terraform/apply.sh"
 

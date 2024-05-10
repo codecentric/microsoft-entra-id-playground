@@ -2,7 +2,7 @@ module "appsettings_compose_json" {
   source                    = "./appsettings"
   client_id                 = azuread_application_registration.ci_service.client_id
   client_secret             = azuread_service_principal_password.ci_service.value
-  code_repository_base_url  = "http://ci-service:8080"
+  code_repository_base_url  = "http://code-repository-service:8080"
   code_repository_client_id = var.repository_service_client_id
 }
 

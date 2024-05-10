@@ -1,6 +1,7 @@
 using CiService.Api.Jobs;
 using CiService.DownstreamApi.CodeRepository;
 using CiService.Extensions;
+using CiService.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 
@@ -33,6 +34,9 @@ builder.Services.AddCorsFromConfiguration();
 builder.Services.AddSwaggerGenWithMicrosoftIdentityAuth();
 
 var app = builder.Build();
+
+// custom extension to log Authorization header as trace log level. Only for demo purposes!
+app.UseLogAuthorizationHeader();
 
 // custom extension to use policies, which where configured above
 app.UseCorsFromConfiguration();
