@@ -7,4 +7,5 @@ obj
 appsettings.Development.json
 appsettings.Compose.json
 appsettings.json
+ci-service.client_credentials.for.code-repository-service.sh
 /config.sh
