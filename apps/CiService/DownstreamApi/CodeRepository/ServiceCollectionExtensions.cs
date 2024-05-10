@@ -2,19 +2,19 @@ using Microsoft.Identity.Web;
 
 namespace CiService.DownstreamApi.CodeRepository;
 
-public static class MicrosoftIdentityAppCallsWebApiAuthenticationBuilderExtensions
+public static class ServiceCollectionExtensions
 {
-    public static MicrosoftIdentityAppCallsWebApiAuthenticationBuilder AddCodeRepositoryApi(
-        this MicrosoftIdentityAppCallsWebApiAuthenticationBuilder builder,
+    public static IServiceCollection AddCodeRepositoryApi(
+        this IServiceCollection services,
         IConfiguration configuration)
     {
-        builder.Services.AddScoped<CodeRepositoryApi>();
+        services.AddScoped<CodeRepositoryApi>();
 
         var downstreamApiConfiguration = configuration
             .GetRequiredSection(DownstreamApiConstants.DownsteamApiConfigurationKey)
             .GetRequiredSection(CodeRepositoryApi.DownstreamApiName);
 
-        return builder.AddDownstreamApi(CodeRepositoryApi.DownstreamApiName,
+        return services.AddDownstreamApi(CodeRepositoryApi.DownstreamApiName,
             options => { downstreamApiConfiguration.Bind(options); });
     }
 }

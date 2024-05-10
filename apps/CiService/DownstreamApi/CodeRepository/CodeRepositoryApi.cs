@@ -1,4 +1,3 @@
-using System.Net;
 using Microsoft.Identity.Abstractions;
 using Newtonsoft.Json;
 

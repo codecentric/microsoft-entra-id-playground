@@ -10,4 +10,4 @@ SCRIPT_DIR=$(dirname -- "$( readlink -f -- "$0"; )";)
 
 cd "${SCRIPT_DIR}/apps"
 
-docker compose up --build --force-recreate
+docker compose up --build --force-recreate $@

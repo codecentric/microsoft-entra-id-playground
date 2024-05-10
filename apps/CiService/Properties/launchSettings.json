@@ -8,7 +8,7 @@
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "http://localhost:8080",
       "applicationUrl": "http://localhost:8081",
       "environmentVariables": {
