@@ -1,4 +1,4 @@
-# Entra ID service to service communication example
+# Microsoft Entra ID service-to-service authentication playground
 
 This repository provides a playground to experiment with service to service communication between custom services.
 
