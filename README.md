@@ -25,7 +25,8 @@ The repository can be used to demo three authentication flows:
 2. Login to Azure Tenant with Azure CLI: `az login --tenant "${YOUR_TENANT_ID}"`
     * Nothing bad will happen if you are signed in to a different tenant by accident. The follwing scripts will simply fail to execute.
 3. Create a `config.sh` file, similar to the `config.example.sh`.
-4. Execute the `setup_and_start.sh` in the project root directory.
+4. Execute `terraform_plan.sh` in the project root directory to inspect planned changes in the Azure tenant.
+5. Execute `setup_and_start.sh` in the project root directory.
     * Provisions example App registrations via terraform in target Entra ID directory
     * Creates `appsettings.Compose.json` in `apps/CiService` and `apps/CodeRepositoryService` for docker-compose environment
     * Creates `appsettings.Development.json` in `apps/CiService` and `apps/CodeRepositoryService` for local debugging

@@ -12,4 +12,6 @@ cd "${SCRIPT_DIR}/apps"
 
 docker compose down -v
 
-"${SCRIPT_DIR}/terraform/destroy.sh"
+cd "${SCRIPT_DIR}/terraform"
+
+terraform destroy -input=false -auto-approve

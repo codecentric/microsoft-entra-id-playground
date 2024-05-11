@@ -11,8 +11,4 @@ set -ex
 cd "${SCRIPT_DIR}/terraform"
 
 terraform init
-terraform apply -input=false -auto-approve 
-
-cd "${SCRIPT_DIR}/apps"
-
-docker compose up --build --force-recreate $@
+terraform plan -input=false
