@@ -8,4 +8,5 @@ appsettings.Development.json
 appsettings.Compose.json
 appsettings.json
 ci-service.client_credentials.for.code-repository-service.sh
+ci-service.device-code.and.on-behalf-of.flow.for.code-repository-service.sh
 /config.sh

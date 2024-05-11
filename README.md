@@ -10,14 +10,18 @@ The repository contains two small REST API services, implemented in ASP.NET Core
     * Provides APIs to create pseudo jobs for repositories, served by CodeRepository service
     * Communicates either with an app-token, acquired by `client_credentials` flow, or with an user-token, acquired by `on-behalf-of` flow
 
-The repository can be used to demo three authentication flows:
+The repository can be used to demo four authentication flows:
 
 1. [Authorization code flow using PKCE](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow)
     * Using swagger-ui
 2. [Client credentials flow](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow)
-    * Using terraform-generated `ci-service.client_credentials.for.code-repository-service.sh` script and swagger-ui or implicitly by creating a CiService job, which uses the [.NET `Microsoft.Identity.Web.DownstreamApi` Library](https://learn.microsoft.com/en-us/entra/identity-platform/scenario-web-api-call-api-app-configuration?tabs=aspnetcore)
+    * Using terraform-generated `ci-service.client_credentials.for.code-repository-service.sh` script and swagger-ui
+    * Alternatively implicitly by creating a CiService job, which uses the [.NET `Microsoft.Identity.Web.DownstreamApi` Library](https://learn.microsoft.com/en-us/entra/identity-platform/scenario-web-api-call-api-app-configuration?tabs=aspnetcore)
 3. [On-behalf-of flow](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-on-behalf-of-flow)
-    * Implicitly using the [.NET `Microsoft.Identity.Web.DownstreamApi` Library](https://learn.microsoft.com/en-us/entra/identity-platform/scenario-web-api-call-api-app-configuration?tabs=aspnetcore)
+    * Using terraform-generated `ci-service.device-code.and.on-behalf-of.flow.for.code-repository-service.sh` script and swagger-ui
+    * Alternatively implicitly using the [.NET `Microsoft.Identity.Web.DownstreamApi` Library](https://learn.microsoft.com/en-us/entra/identity-platform/scenario-web-api-call-api-app-configuration?tabs=aspnetcore)
+4. [Device code flow](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-device-code)
+    * Using terraform-generated `ci-service.device-code.and.on-behalf-of.flow.for.code-repository-service.sh` script and swagger-ui
 
 ## Getting started
 
