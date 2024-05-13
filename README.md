@@ -45,7 +45,7 @@ The repository can be used to demo four authentication flows:
 ### Create Code Repository
 
 1. Select `CodeRepository` definition (should be the default)
-2. Authorize for `code-repository-service` Enterprise application
+2. Authorize for `code-repository-service` application
     1. Click `Authorize` button to open `Available authorizations` dialog
     2. Scroll to `UserAuthentication` form
     3. Select `{app-id}/.default` scope.
@@ -62,9 +62,9 @@ The repository can be used to demo four authentication flows:
     * Decode Bearer token. E.g. via https://jwt.io/
     * ```
       {
-        "aud": "{CODE_REPOSITORY_CLIENT_ID}", // Audience: ID of the code repository server Enterprise Application. Other applications must not accept this token.
+        "aud": "{CODE_REPOSITORY_CLIENT_ID}", // Audience: Client ID of the code repository server application. Other applications must not accept this token.
         "iss": "https://login.microsoftonline.com/{TENANT_ID}/v2.0", // Issuer: Authorization server which issued this token. Is trusted by the code repository server.
-        "azp": "{CODE_REPOSITORY_CLIENT_ID}", // Authorized Party: ID of the code repository server Enterprise Application.
+        "azp": "{CODE_REPOSITORY_CLIENT_ID}", // Authorized Party: Client ID of the code repository server application.
         "name": "{user_display_name}",
         "oid": "{user_principal_object_id_in_entra_id}",
         "preferred_username": "{preferred_username}",
@@ -79,7 +79,7 @@ The repository can be used to demo four authentication flows:
 ### Create Job for test repository, authenticating to CodeRepositoryService via app token
 
 1. Select `CiService` definition in swagger-ui
-2. Authorize for `ci-service` Enterprise application
+2. Authorize for `ci-service` application
     1. Click `Authorize` button to open `Available authorizations` dialog
     2. Scroll to `UserAuthentication` form
     3. Select `{app-id}/.default` scope.
@@ -94,9 +94,9 @@ The repository can be used to demo four authentication flows:
     * Decode Bearer token. E.g. via https://jwt.io/
     * ```
       {
-        "aud": "{CI_SERVICE_CLIENT_ID}", // Audience: ID of the ci service Enterprise Application. Other applications must not accept this token.
+        "aud": "{CI_SERVICE_CLIENT_ID}", // Audience: Client ID of the ci service application. Other applications must not accept this token.
         "iss": "https://login.microsoftonline.com/{TENANT_ID}/v2.0", // Issuer: Authorization server which issued this token. Is trusted by the ci service.
-        "azp": "{CI_SERVICE_CLIENT_ID}", // Authorized Party: ID of the ci service Enterprise Application.
+        "azp": "{CI_SERVICE_CLIENT_ID}", // Authorized Party: Client ID of the ci service application.
         "name": "{user_display_name}",
         "oid": "{user_principal_object_id_in_entra_id}",
         "preferred_username": "{preferred_username}",
@@ -109,9 +109,9 @@ The repository can be used to demo four authentication flows:
     * Decode Bearer token. E.g. via https://jwt.io/
     * ```
       {
-        "aud": "{CODE_REPOSITORY_CLIENT_ID}",  // Audience: ID of the code repository server Enterprise Application. Other applications must not accept this token.
+        "aud": "{CODE_REPOSITORY_CLIENT_ID}",  // Audience: Client ID of the code repository server application. Other applications must not accept this token.
         "iss": "https://login.microsoftonline.com/{TENANT_ID}/v2.0",
-        "azp": "{CI_SERVICE_CLIENT_ID}", // Authorized Party: ID of the ci service Enterprise Application.
+        "azp": "{CI_SERVICE_CLIENT_ID}", // Authorized Party: Client ID of the ci service application.
         "oid": "{ci_service_principal_object_id_in_entra_id}",
         "roles": [
           "Repositories.Code.Read.All" // ci-service has the code-repsitory-service app role "Repositories.Code.Read.All" assigned. Therefore it is allowed to read the repository code of any user.
@@ -131,9 +131,9 @@ The repository can be used to demo four authentication flows:
     * Decode Bearer token. E.g. via https://jwt.io/
     * ```
       {
-        "aud": "{CODE_REPOSITORY_CLIENT_ID}",  // Audience: ID of the code repository server Enterprise Application. Other applications must not accept this token.
+        "aud": "{CODE_REPOSITORY_CLIENT_ID}",  // Audience: Client ID of the code repository server application. Other applications must not accept this token.
         "iss": "https://login.microsoftonline.com/{TENANT_ID}/v2.0",
-        "azp": "{CI_SERVICE_CLIENT_ID}",  // Authorized Party: ID of the ci service Enterprise Application.
+        "azp": "{CI_SERVICE_CLIENT_ID}",  // Authorized Party: Client ID of the ci service application.
         "name": "{user_display_name}",
         "oid": "{user_principal_object_id_in_entra_id}",
         "preferred_username": "{preferred_username}",
