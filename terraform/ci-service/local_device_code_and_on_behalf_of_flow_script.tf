@@ -43,7 +43,7 @@ echo "$DEVICE_CODE_TOKEN_RESPONSE" | jq
 echo
 echo
 
-CI_SERVICE_TOKEN=$(echo "$DEVICE_CODE_TOKEN_RESPONSE" | jq -r .token)
+CI_SERVICE_TOKEN=$(echo "$DEVICE_CODE_TOKEN_RESPONSE" | jq -r .access_token)
 
 echo "On-Behalf-Of Flow Response:"
 curl --silent https://login.microsoftonline.com/${data.azuread_client_config.current.tenant_id}/oauth2/v2.0/token \
