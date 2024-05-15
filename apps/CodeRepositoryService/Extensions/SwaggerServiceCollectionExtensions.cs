@@ -59,14 +59,23 @@ public static class SwaggerServiceCollectionExtensions
                 options.AddSecurityDefinition(servicePrincipalAuthSecrityScheme, new OpenApiSecurityScheme()
                 {
                     Name = servicePrincipalAuthSecrityScheme,
-                    Description = $@"Use this scheme to authenticate as a service principal against Entra ID
+                    Description = $@"Use this scheme to authenticate using any bearer token against Entra ID
 
 <b>
 Microsoft Entra does not support receiving client credentials from a browser!
 Instead use curl for example:
 </b>
 
-curl https://login.microsoftonline.com/{identityOptions.TenantId}/oauth2/v2.0/token -d 'grant_type=client_credentials' -d 'scope={identityOptions.ClientId}/.default' -d 'client_id=__INSERT_YOUR_CLIENT_ID__' -d 'client_secret=__INSERT_YOUR_CLIENT_SECRET__'",
+curl https://login.microsoftonline.com/{identityOptions.TenantId}/oauth2/v2.0/token -d 'grant_type=client_credentials' -d 'scope={identityOptions.ClientId}/.default' -d 'client_id={identityOptions.ClientId}' -d 'client_secret=__INSERT_YOUR_CLIENT_SECRET__'
+
+<b>Or use the following script to get a ci-service service principal token for the code-repository application</b>
+
+ci-service.client_credentials.for.code-repository-service.sh
+
+<b>Or use a user token, obtained by an <i>on-behalf-of flow</i>, using the following script:</b>
+
+ci-service.device-code.and.on-behalf-of.flow.for.code-repository-service.sh
+",
                     Type = SecuritySchemeType.Http,
                     Scheme = authScheme,
                     BearerFormat = "JWT"
