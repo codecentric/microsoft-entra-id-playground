@@ -34,7 +34,8 @@ public static class SwaggerServiceCollectionExtensions
                 var ownScope = $"{identityOptions.ClientId}/.default";
                 var scopes = new Dictionary<string, string>()
                 {
-                    { ownScope, "Request permissions for current application" }
+                    { ownScope, "Request permissions for current application (by application id)" },
+                    { $"api://{ownScope}", "Request permissions for current application (by application uri)" }
                 };
 
                 var userAuthSecrityScheme = "UserAuthentication";
