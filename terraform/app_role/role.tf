@@ -7,6 +7,7 @@ resource "azuread_application_app_role" "role" {
   description          = var.role_description
   value                = var.scope
   allowed_member_types = [
-    "Application"
+    "Application",
+    "User"
   ]
 }
